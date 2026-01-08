@@ -1,0 +1,85 @@
+// Switch to the correct database without using the 'use' command
+db = db.getSiblingDB("examDB");
+
+// ---------------------------------------------------------
+// Exercise 1: Database & Collection Creation
+// ---------------------------------------------------------
+// Inserting data automatically creates the 'students' collection
+db.students.insertOne({
+    name: "Aarav Patel",
+    department: "IT",
+    semester: 3
+});
+
+db.students.insertOne({
+    name: "Vivaan Shah",
+    department: "CE",
+    semester: 5
+});
+
+// ---------------------------------------------------------
+// Exercise 2: Insert Document with Multiple Fields
+// ---------------------------------------------------------
+// Must include: name, department, semester, mobile
+db.students.insertOne({
+    name: "Diya Mehra",
+    department: "ICT",
+    semester: 1,
+    mobile: "9876543210"
+});
+
+// ---------------------------------------------------------
+// Exercise 3: Array of Simple Values
+// ---------------------------------------------------------
+// Creating 'subjects' collection with an array
+db.subjects.insertOne({
+    course_name: "B.Tech Computer Science",
+    subject_list: ["Data Structures", "Operating Systems", "Java Programming", "Mathematics"]
+});
+
+// ---------------------------------------------------------
+// Exercise 4: Array of Objects
+// ---------------------------------------------------------
+// Creating 'faculty' collection with array of objects
+db.faculty.insertOne({
+    department: "Computer Engineering",
+    teachers: [
+        { name: "Prof. Tushar Gohil", experience: 15 },
+        { name: "Prof. Sneha Gupta", experience: 8 },
+        { name: "Prof. Rajesh Kumar", experience: 12 }
+    ]
+});
+
+// ---------------------------------------------------------
+// Exercise 5: Explicit Primary Key
+// ---------------------------------------------------------
+// Using ObjectId() explicitly
+db.students.insertOne({
+    _id: ObjectId(),
+    name: "Ishaan Verma",
+    department: "IT",
+    semester: 7
+});
+
+// ---------------------------------------------------------
+// Exercise 7: Multiple Inserts
+// ---------------------------------------------------------
+// (We have already inserted 4 students above, satisfying the >3 requirement)
+
+// ---------------------------------------------------------
+// Exercise 6: Duplicate Primary Key Observation
+// ---------------------------------------------------------
+// This section is placed last because the second command WILL FAIL.
+// This demonstrates the unique constraint of the _id field.
+
+// 1. Insert first document with manual _id
+db.students.insertOne({
+    _id: 1001,
+    name: "Unique Student"
+});
+
+// 2. Attempt to insert duplicate _id (This triggers the expected error)
+db.students.insertOne({
+    _id: 1001,
+    name: "Duplicate Student"
+});
